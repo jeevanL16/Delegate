@@ -59,6 +59,17 @@ def run_router(
         _write_audit(db, ticket.id, analyzer_output, decision)
         return decision
 
+    # ── Fast path: confident refund / payment failure issues ─────────────────
+    if analyzer_output.confident and analyzer_output.issue_type in ("payment_failed", "refund_status"):
+        decision = RouterDecision(
+            tools_to_call=["get_order_status", "issue_refund", "notify_customer", "update_ticket_status"],
+            escalate_directly=False,
+            escalate_reason=None,
+            reasoning=f"Deterministic fast-path routing for confident {analyzer_output.issue_type} issue.",
+        )
+        _write_audit(db, ticket.id, analyzer_output, decision)
+        return decision
+
     user_message = (
         f"Analyzer output:\n{analyzer_output.model_dump_json(indent=2)}\n\n"
         f"Ticket metadata:\n"

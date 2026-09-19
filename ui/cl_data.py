@@ -107,8 +107,7 @@ def get_db_async_url() -> str:
         return ""
     clean = raw_url.replace("postgresql+psycopg://", "postgresql+asyncpg://")
     clean = clean.replace("postgresql://", "postgresql+asyncpg://")
-    base_url = clean.split("?")[0]
-    return f"{base_url}?prepared_statement_cache_size=0&statement_cache_size=0"
+    return clean.split("?")[0]
 
 
 async def init_chainlit_tables():
@@ -123,7 +122,14 @@ async def init_chainlit_tables():
     ssl_ctx.verify_mode = ssl.CERT_NONE
 
     try:
-        engine = create_async_engine(async_url, connect_args={"ssl": ssl_ctx})
+        engine = create_async_engine(
+            async_url,
+            connect_args={
+                "ssl": ssl_ctx,
+                "statement_cache_size": 0,
+                "prepared_statement_cache_size": 0,
+            },
+        )
         async with engine.begin() as conn:
             for stmt in CREATE_TABLES_SQL.strip().split(";"):
                 stmt = stmt.strip()
@@ -157,8 +163,8 @@ def get_data_layer() -> Optional[SQLAlchemyDataLayer]:
         conninfo=async_url,
         connect_args={
             "ssl": ssl_ctx,
+            "statement_cache_size": 0,
             "prepared_statement_cache_size": 0,
-            "statement_cache_size": 0
         },
         ssl_require=True,
         show_logger=False,
