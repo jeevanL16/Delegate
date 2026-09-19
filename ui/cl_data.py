@@ -156,7 +156,11 @@ def get_data_layer() -> Optional[SQLAlchemyDataLayer]:
 
     return SQLAlchemyDataLayer(
         conninfo=async_url,
-        connect_args={"ssl": ssl_ctx},
+        connect_args={
+            "ssl": ssl_ctx,
+            "prepared_statement_cache_size": 0,
+            "statement_cache_size": 0
+        },
         ssl_require=True,
         show_logger=False,
     )
