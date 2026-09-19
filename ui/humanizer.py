@@ -35,8 +35,9 @@ def _generate_llm_response(
 ) -> Optional[str]:
     """Use Groq LLM to synthesize a tailored, empathetic answer directly addressing the customer's inquiry."""
     try:
-        from app.agent.llm_client import _get_client
-        client, _ = _get_client()
+        from app.agent.llm_client import _get_client, _resolve_model
+        client, provider = _get_client()
+        active_model = _resolve_model(provider)
 
         status = (ticket.get("status") or "").lower()
         resolution = ticket.get("resolution") or ""
@@ -53,11 +54,12 @@ def _generate_llm_response(
             "Your job is to directly, warmly, and accurately answer the customer's specific question using their order status and support resolution.\n\n"
             "Guidelines:\n"
             "1. Answer what the customer asked directly and clearly in 2 to 4 concise sentences.\n"
-            "2. Always format currency in Indian Rupees (₹).\n"
-            "3. NEVER reveal internal tool names, internal policy rule names, or raw JSON structures.\n"
-            "4. If the ticket is escalated, explain the situation clearly and reassure the customer that our senior priority specialist team is personally reviewing their case.\n"
-            "5. If a refund was approved, confirm the amount in ₹ and the standard 3-5 business day refund timeline.\n"
-            "6. Always address the customer warmly by name."
+            "2. If the customer asks why their order or payment failed, explain empathetically that payment failures typically happen due to bank authorization timeouts, network drops, or payment gateway security checks.\n"
+            "3. Reassure the customer regarding their funds: confirm any processed refund (with amount in ₹ and 3-5 business day timeline) or reassure them that any debited amount automatically reverses.\n"
+            "4. Always format currency in Indian Rupees (₹).\n"
+            "5. NEVER reveal internal tool names, internal policy rule names, or raw JSON structures.\n"
+            "6. If the ticket is escalated, explain clearly and reassure the customer that our senior priority specialist team is personally reviewing their case.\n"
+            "7. Always address the customer warmly by name."
         )
 
         user_prompt = (
@@ -69,7 +71,7 @@ def _generate_llm_response(
         )
 
         resp = client.chat.completions.create(
-            model=os.getenv("LLM_MODEL", "openai/gpt-oss-120b"),
+            model=active_model,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
