@@ -162,17 +162,18 @@ def call_llm_tools(
     # Build the assistant message dict ready to append to conversation
     tool_calls_list = None
     if msg.tool_calls:
-        tool_calls_list = [
-            {
-                "id": tc.id,
-                "type": "function",
-                "function": {
-                    "name": tc.function.name,
-                    "arguments": tc.function.arguments,
-                },
-            }
-            for tc in msg.tool_calls
-        ]
+        tool_calls_list = []
+        for tc in msg.tool_calls:
+            func = getattr(tc, "function", None)
+            if func is not None:
+                tool_calls_list.append({
+                    "id": getattr(tc, "id", ""),
+                    "type": "function",
+                    "function": {
+                        "name": getattr(func, "name", ""),
+                        "arguments": getattr(func, "arguments", "{}"),
+                    },
+                })
 
     message_dict: dict = {
         "role": "assistant",
