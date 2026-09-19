@@ -6,14 +6,13 @@
 (function () {
   'use strict';
 
-  // Force dark theme in localStorage and on root html element
+  // Force light theme in localStorage and on root html element
   try {
-    if (localStorage.getItem('theme') !== 'dark') {
-      localStorage.setItem('theme', 'dark');
-    }
+    localStorage.setItem('theme', 'light');
   } catch (e) {}
-  document.documentElement.classList.add('dark');
-  document.documentElement.setAttribute('data-theme', 'dark');
+  document.documentElement.classList.remove('dark');
+  document.documentElement.classList.add('light');
+  document.documentElement.setAttribute('data-theme', 'light');
 
   function injectHeader() {
     if (document.getElementById('delegate-header-bar')) {

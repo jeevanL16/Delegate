@@ -116,7 +116,7 @@ reaction_on_message_received = false
 # Name of the assistant.
 name = "Riya, Delegate Support"
 
-default_theme = "dark"
+default_theme = "light"
 
 # Disable showing the default readme/empty screen on startup
 show_readme_as_default = false
@@ -165,8 +165,8 @@ alert_style = "modern"
 login_page_image = "/public/hero_login.png"
 
 # Custom login page image filter (Tailwind internal filters, no dark/light variants)
-login_page_image_filter = "brightness-75"
-login_page_image_dark_filter = "brightness-75"
+login_page_image_filter = "brightness-95"
+login_page_image_dark_filter = "brightness-95"
 
 # Specify a custom meta URL (used for meta tags like og:url)
 custom_meta_url = "https://delegate.internal"
@@ -183,13 +183,19 @@ default_avatar_file_url = "/public/avatar.png"
 # Avatar size in pixels (default: 20).
 avatar_size = 28
 
+[UI.theme.light]
+    # Primary accent color (Fintech Emerald / Teal)
+    primary = "#0D9488"
+    # Clean, airy light background
+    background = "#F8FAFC"
+    # Paper / Card white background
+    paper = "#FFFFFF"
+
 [UI.theme.dark]
-    # Primary accent color (fintech teal)
-    primary = "#22c6a0"
-    # Obsidian dark background
-    background = "#0b0d12"
-    # Paper/card background
-    paper = "#111827"
+    # Also set fallback to light
+    primary = "#0D9488"
+    background = "#F8FAFC"
+    paper = "#FFFFFF"
 
 [meta]
 generated_by = "2.12.0"
