@@ -43,7 +43,7 @@ services:
         value: INFO
 
   # ============================================================================
-  # Frontend Streamlit UI Service
+  # Frontend Chainlit UI Service
   # ============================================================================
   - type: web
     name: delegate-ui
@@ -51,8 +51,10 @@ services:
     region: ohio
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run ui/streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    startCommand: chainlit run ui/chainlit_app.py --host 0.0.0.0 --port $PORT
     envVars:
+      - key: DATABASE_URL
+        sync: false
       - key: API_BASE_URL
         fromService:
           type: web
@@ -70,3 +72,7 @@ services:
           envVarKey: HUMAN_JWT_SECRET
       - key: HUMAN_JWT_TOKEN
         sync: false
+      - key: SHOW_REASONING_TO_CUSTOMER
+        value: "true"
+      - key: DEMO_MODE
+        value: "true"

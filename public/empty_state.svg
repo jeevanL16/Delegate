@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" fill="none">
+  <circle cx="80" cy="80" r="70" fill="url(#bgGrad)" stroke="#1E293B" stroke-width="2"/>
+  <circle cx="80" cy="80" r="50" stroke="#00C9A7" stroke-dasharray="4 4" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="80" cy="80" r="34" fill="#0D1B2A" stroke="#10B981" stroke-width="2"/>
+  <path d="M68 80L76 88L94 70" stroke="#00F2FE" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="80" cy="24" r="3" fill="#10B981"/>
+  <circle cx="136" cy="80" r="2.5" fill="#00C9A7"/>
+  <circle cx="80" cy="136" r="3" fill="#6366F1"/>
+  <circle cx="24" cy="80" r="2.5" fill="#F59E0B"/>
+  <defs>
+    <radialGradient id="bgGrad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(80 80) rotate(90) scale(70)">
+      <stop stop-color="#111827"/>
+      <stop offset="0.8" stop-color="#0B0F17"/>
+      <stop offset="1" stop-color="#070A0F"/>
+    </radialGradient>
+  </defs>
+</svg>

@@ -1,0 +1,313 @@
+/* ============================================================
+   Delegate: Resolve — Premium Fintech Theme (Overhaul)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Ultra-dark obsidian base */
+  --delegate-bg: #040608;
+  --delegate-bg-gradient: radial-gradient(circle at top right, #0a111a 0%, #040608 100%);
+  
+  /* Rich, multi-stop metallic gradients for accents */
+  --delegate-accent: #22c6a0;
+  --delegate-accent-dark: #105a49;
+  --delegate-accent-gradient: linear-gradient(135deg, #5fe3c4 0%, #22c6a0 50%, #158f73 100%);
+  
+  /* Refined Glassmorphism */
+  --delegate-glass: rgba(15, 20, 25, 0.4);
+  --delegate-glass-border: rgba(255, 255, 255, 0.06);
+  --delegate-glass-highlight: rgba(255, 255, 255, 0.12);
+  
+  --delegate-text: #f1f5f9;
+  --delegate-muted: #8b98a5;
+  --delegate-header-h: 60px;
+}
+
+/* Base resets & typography */
+body, * {
+  font-family: 'Outfit', -apple-system, sans-serif !important;
+}
+
+body, #root, main, .cl-root, .MuiBox-root, [class*="makeStyles-root"] {
+  background-color: var(--delegate-bg) !important;
+  background-image: var(--delegate-bg-gradient) !important;
+  color: var(--delegate-text) !important;
+}
+
+/* ---------- Persistent header bar ---------- */
+#delegate-header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--delegate-header-h);
+  z-index: 2000;
+  background: rgba(4, 6, 8, 0.7);
+  backdrop-filter: blur(24px) saturate(150%);
+  border-bottom: 1px solid var(--delegate-glass-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.delegate-header-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delegate-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  color: var(--delegate-text);
+}
+
+.delegate-header-brand img {
+  filter: drop-shadow(0 2px 4px rgba(34, 198, 160, 0.4));
+}
+
+.delegate-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.85rem;
+}
+
+.persona-label {
+  background: var(--delegate-accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--delegate-muted);
+  font-weight: 500;
+}
+
+body.has-delegate-header #root,
+body.has-delegate-header main {
+  padding-top: var(--delegate-header-h);
+}
+
+/* ---------- Glass cards ---------- */
+.order-banner,
+.empty-state-card,
+.section-header,
+.policy-footer-badge {
+  background: var(--delegate-glass);
+  border: 1px solid var(--delegate-glass-border);
+  border-top: 1px solid var(--delegate-glass-highlight);
+  border-left: 1px solid var(--delegate-glass-highlight);
+  border-radius: 16px;
+  backdrop-filter: blur(20px) saturate(120%);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.order-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  margin: 10px 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(34, 198, 160, 0.1);
+  color: var(--delegate-accent);
+  border: 1px solid rgba(34, 198, 160, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  margin-bottom: 12px;
+}
+
+.section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.badge-count {
+  background: var(--delegate-accent-gradient);
+  color: #040608;
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+/* ---------- Empty state ---------- */
+.empty-state-card {
+  text-align: center;
+  padding: 40px 24px;
+  margin: 16px 0;
+}
+
+.empty-state-card h3 {
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+
+.empty-state-card p {
+  color: var(--delegate-muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Policy footer badge ---------- */
+.policy-footer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  margin-top: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--delegate-muted);
+  border-radius: 8px;
+}
+
+/* ---------- Staff escalation cards & Animation ---------- */
+.cl-message-content:has(h3) {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-origin: center;
+}
+
+.cl-message-content:has(h3):hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Action buttons */
+button[data-testid^="action-"] {
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  background: var(--delegate-glass) !important;
+  border: 1px solid var(--delegate-glass-highlight) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.2s ease !important;
+}
+
+button[data-testid^="action-"]:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+button[data-testid^="action-"]:active {
+  transform: translateY(1px);
+}
+
+/* Chat bubble styling */
+/* Chainlit applies specific classes, we'll target the message row and bubble */
+.message-row {
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes slideUpFade {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* User Messages */
+.message-row[data-author="User"] .cl-message {
+  background: linear-gradient(145deg, rgba(34, 198, 160, 0.15), rgba(16, 90, 73, 0.05)) !important;
+  border: 1px solid rgba(34, 198, 160, 0.2) !important;
+  border-bottom-right-radius: 4px !important;
+  border-top-right-radius: 20px !important;
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
+  box-shadow: 0 4px 16px rgba(34, 198, 160, 0.05) !important;
+}
+
+/* Assistant Messages */
+.message-row:not([data-author="User"]) .cl-message {
+  background: var(--delegate-glass) !important;
+  border: 1px solid var(--delegate-glass-border) !important;
+  border-top: 1px solid var(--delegate-glass-highlight) !important;
+  border-bottom-left-radius: 4px !important;
+  border-top-right-radius: 20px !important;
+  border-top-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Message Composer Wrappers */
+#chat-input-wrapper, .cl-chat-input, .MuiInputBase-root, form, [data-testid="chat-input-container"] {
+  background-color: #0B0F19 !important;
+}
+
+/* Message Composer Textarea */
+[data-testid="chat-input"], .cl-input, textarea, .MuiInputBase-input, #chat-input {
+  background-color: transparent !important;
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+
+/* Send Button */
+button[id="send-button"], [data-testid="send-button"], .cl-send-button, button[aria-label="Send"] {
+  background-color: #2DD4BF !important;
+  color: #0B0F19 !important;
+  border-radius: 50% !important;
+}
+button[id="send-button"] svg, [data-testid="send-button"] svg {
+  fill: #0B0F19 !important;
+  color: #0B0F19 !important;
+}
+
+/* Hide Sidebar Info Alert (No threads found) */
+.MuiAlert-root, [role="alert"], .MuiAlert-standardInfo {
+  display: none !important;
+}
+
+/* Hide stock UI */
+#theme-toggle,
+button[aria-label*="theme" i],
+button[aria-label*="mode" i],
+button[aria-label*="light" i],
+button[aria-label*="dark" i],
+.cl-theme-toggle {
+  display: none !important;
+}
+
+a[href*="chainlit.io"],
+.watermark,
+[class*="watermark"] {
+  display: none !important;
+}

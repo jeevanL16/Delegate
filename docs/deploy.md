@@ -7,7 +7,7 @@ This guide walks you through deploying **Delegate: Resolve** to **Render** with 
 ## Architecture Overview
 
 ```
-[ Customer / Agent ] ──> [ Streamlit UI (Port 8501 / $PORT) ]
+[ Customer / Agent ] ──> [ Chainlit UI (Port 8000 / $PORT) ]
                                │ (HTTP via API_BASE_URL)
                                ▼
                         [ FastAPI Backend (Port 8000 / $PORT) ]
@@ -19,7 +19,7 @@ This guide walks you through deploying **Delegate: Resolve** to **Render** with 
 ```
 
 - **Backend (`delegate-api`)**: FastAPI service running on Uvicorn. Exposes `/tickets`, `/human`, and `/health`.
-- **Frontend (`delegate-ui`)**: Streamlit web app providing Paytm-Style Support Chat, Demo Console, and Human Queue.
+- **Frontend (`delegate-ui`)**: Chainlit web app providing Customer Support Chat with visible reasoning and Staff Console.
 - **Database**: Remote Neon PostgreSQL database (SSL required: `sslmode=require`).
 - **Policy Engine**: Server-enforced rules (₹100 refund cap, 5-tool ceiling, VIP/repeat-complainer escalation).
 
@@ -89,13 +89,17 @@ If you prefer to configure services individually in Render:
 - **Type**: Web Service
 - **Runtime**: Python 3
 - **Build Command**: `pip install -r requirements.txt`
-- **Start Command**: `streamlit run ui/streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true`
+- **Start Command**: `chainlit run ui/chainlit_app.py --host 0.0.0.0 --port $PORT`
 - **Environment Variables**:
   | Key | Example / Value | Description |
   |---|---|---|
+  | `DATABASE_URL` | `postgresql+asyncpg://...` | Neon PostgreSQL for conversation thread persistence |
   | `API_BASE_URL` | `https://delegate-api.onrender.com` | Public URL of `delegate-api` service |
   | `SERVICE_API_KEY` | *(same as delegate-api)* | Shared API key for tickets |
   | `HUMAN_JWT_SECRET` | *(same as delegate-api)* | Shared secret for generating human JWTs |
+  | `CHAINLIT_AUTH_SECRET` | *(random 64-char secret)* | Secret for signing Chainlit auth session cookies |
+  | `SHOW_REASONING_TO_CUSTOMER` | `true` | Show/hide the internal reasoning steps to customers (demo only) |
+  | `DEMO_MODE` | `true` | Allows 'demo123' password login instead of real auth (demo only) |
 
 ---
 
