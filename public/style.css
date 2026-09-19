@@ -1,50 +1,102 @@
-/* ============================================================
-   Delegate: Resolve — Premium Light Mode Palette (Fintech Edition)
-   ============================================================ */
+/* ==========================================================================
+   Delegate: Resolve — World-Class Fintech Light Theme
+   Crafted with 15+ years UI/UX Design Precision (Stripe / Linear / Intercom Aesthetic)
+   ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  /* Crisp Light Canvas */
-  --delegate-bg: #F8FAFC;
-  --delegate-bg-gradient: radial-gradient(circle at 50% 0%, #FFFFFF 0%, #F1F5F9 100%);
+  /* Surface Canvas & Elevation */
+  --delegate-canvas: #F8FAFC;
+  --delegate-canvas-gradient: radial-gradient(100% 100% at 50% 0%, #FFFFFF 0%, #F1F5F9 100%);
+  --delegate-surface: #FFFFFF;
+  --delegate-surface-subtle: #F8FAFC;
+  --delegate-surface-hover: #F1F5F9;
   
-  /* Vibrant Emerald / Teal Accents */
-  --delegate-accent: #0D9488;
-  --delegate-accent-dark: #0F766E;
-  --delegate-accent-light: #CCFBF1;
-  --delegate-accent-gradient: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
+  /* Borders & Hairlines */
+  --delegate-border: #E2E8F0;
+  --delegate-border-subtle: #EDF2F7;
+  --delegate-border-strong: #CBD5E1;
   
-  /* Ultra-Crisp Card Surfaces */
-  --delegate-card-bg: #FFFFFF;
-  --delegate-card-border: #E2E8F0;
-  --delegate-card-highlight: #F1F5F9;
+  /* Brand Accents — Precision Emerald / Teal */
+  --delegate-brand: #0D9488;
+  --delegate-brand-hover: #0F766E;
+  --delegate-brand-active: #115E59;
+  --delegate-brand-light: #F0FDFA;
+  --delegate-brand-border: #CCFBF1;
+  --delegate-brand-gradient: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
   
-  /* High-Contrast Typography */
-  --delegate-text: #0F172A;
-  --delegate-text-secondary: #334155;
-  --delegate-muted: #64748B;
+  /* Typography Scale (Slate Palette) */
+  --delegate-text-primary: #0F172A;     /* Slate 900 */
+  --delegate-text-secondary: #334155;   /* Slate 700 */
+  --delegate-text-muted: #64748B;       /* Slate 500 */
+  --delegate-text-subtle: #94A3B8;      /* Slate 400 */
   
-  /* Soft Layered Shadows */
-  --delegate-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --delegate-shadow-md: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
-  --delegate-shadow-lg: 0 10px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  /* Semantic Status Colors */
+  --delegate-success-bg: #ECFDF5;
+  --delegate-success-text: #047857;
+  --delegate-success-border: #A7F3D0;
+  
+  --delegate-danger-bg: #FEF2F2;
+  --delegate-danger-text: #B91C1C;
+  --delegate-danger-border: #FECACA;
+  
+  --delegate-warning-bg: #FFFBEB;
+  --delegate-warning-text: #B45309;
+  --delegate-warning-border: #FDE68A;
+
+  /* Ambient Multi-Layer Shadows */
+  --delegate-shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --delegate-shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --delegate-shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --delegate-shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
   
   --delegate-header-h: 60px;
 }
 
-/* Base resets & typography */
+/* ==========================================================================
+   Global Reset & High-Definition Typography
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 body, * {
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+code, pre, .mono, [class*="mono"] {
+  font-family: 'JetBrains Mono', monospace !important;
 }
 
 body, #root, main, .cl-root, .MuiBox-root, [class*="makeStyles-root"] {
-  background-color: var(--delegate-bg) !important;
-  background-image: var(--delegate-bg-gradient) !important;
-  color: var(--delegate-text) !important;
+  background-color: var(--delegate-canvas) !important;
+  background-image: var(--delegate-canvas-gradient) !important;
+  color: var(--delegate-text-primary) !important;
 }
 
-/* ---------- Persistent Header Bar ---------- */
+/* Custom Sleek Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--delegate-border-strong);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--delegate-text-subtle);
+}
+
+/* ==========================================================================
+   Header Bar (Translucent Glassmorphism)
+   ========================================================================== */
 #delegate-header-bar {
   position: fixed;
   top: 0;
@@ -54,11 +106,12 @@ body, #root, main, .cl-root, .MuiBox-root, [class*="makeStyles-root"] {
   z-index: 2000;
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--delegate-card-border);
-  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--delegate-border);
+  box-shadow: 0 1px 8px rgba(15, 23, 42, 0.03);
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 28px;
 }
 
 .delegate-header-inner {
@@ -73,30 +126,54 @@ body, #root, main, .cl-root, .MuiBox-root, [class*="makeStyles-root"] {
   align-items: center;
   gap: 12px;
   font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: -0.2px;
-  color: var(--delegate-text);
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  color: var(--delegate-text-primary);
 }
 
 .delegate-header-brand img {
-  filter: drop-shadow(0 2px 4px rgba(13, 148, 136, 0.25));
+  filter: drop-shadow(0 2px 6px rgba(13, 148, 136, 0.25));
+  transition: transform 0.2s ease;
+}
+
+.delegate-header-brand:hover img {
+  transform: scale(1.05);
 }
 
 .delegate-header-word {
-  color: #0F172A !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700;
+  color: var(--delegate-text-primary) !important;
+  font-size: 1.12rem;
 }
 
 .delegate-header-trust {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  color: #0D9488;
-  background: #F0FDFA;
-  padding: 4px 12px;
+  color: var(--delegate-brand);
+  background: var(--delegate-brand-light);
+  padding: 5px 14px;
   border-radius: 999px;
-  border: 1px solid #CCFBF1;
+  border: 1px solid var(--delegate-brand-border);
+  box-shadow: var(--delegate-shadow-xs);
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--delegate-brand);
+  box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.7);
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(13, 148, 136, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(13, 148, 136, 0); }
 }
 
 body.has-delegate-header #root,
@@ -104,268 +181,290 @@ body.has-delegate-header main {
   padding-top: var(--delegate-header-h);
 }
 
-/* ---------- Sidebar Styling ---------- */
+/* ==========================================================================
+   Sidebar & Navigation
+   ========================================================================== */
 aside, [data-testid="sidebar"], .cl-sidebar {
-  background-color: #FFFFFF !important;
-  border-right: 1px solid var(--delegate-card-border) !important;
-  color: var(--delegate-text) !important;
+  background-color: var(--delegate-surface) !important;
+  border-right: 1px solid var(--delegate-border) !important;
+  color: var(--delegate-text-primary) !important;
 }
 
-/* Chat thread list items */
 [data-testid="thread-item"], .cl-thread-item {
   color: var(--delegate-text-secondary) !important;
   border-radius: 10px !important;
-  transition: all 0.15s ease !important;
+  padding: 8px 12px !important;
+  margin: 2px 0 !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 [data-testid="thread-item"]:hover, .cl-thread-item:hover {
-  background-color: #F1F5F9 !important;
-  color: var(--delegate-text) !important;
+  background-color: var(--delegate-surface-hover) !important;
+  color: var(--delegate-text-primary) !important;
+  transform: translateX(2px);
 }
 
-/* ---------- Crisp White Cards ---------- */
+/* ==========================================================================
+   Order Cards, Banners & Section Components
+   ========================================================================== */
 .order-banner,
 .empty-state-card,
 .section-header,
 .policy-footer-badge {
-  background: var(--delegate-card-bg);
-  border: 1px solid var(--delegate-card-border);
-  border-radius: 16px;
+  background: var(--delegate-surface);
+  border: 1px solid var(--delegate-border);
+  border-radius: 14px;
   box-shadow: var(--delegate-shadow-md);
-  color: var(--delegate-text);
+  color: var(--delegate-text-primary);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .order-banner {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 20px;
-  margin: 14px 0;
-  font-size: 0.95rem;
+  padding: 12px 18px;
+  margin: 12px 0;
+  font-size: 0.94rem;
   font-weight: 600;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFC 100%);
+}
+
+.order-banner:hover {
+  border-color: var(--delegate-border-strong);
+  box-shadow: var(--delegate-shadow-lg);
 }
 
 .status-pill {
-  display: inline-block;
-  padding: 3px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  background: #ECFDF5;
-  color: #047857;
-  border: 1px solid #A7F3D0;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.04em;
+  background: var(--delegate-success-bg);
+  color: var(--delegate-success-text);
+  border: 1px solid var(--delegate-success-border);
 }
 
 .status-pill:has-text("FAILED"),
 .status-pill[class*="failed"] {
-  background: #FEF2F2 !important;
-  color: #B91C1C !important;
-  border-color: #FECACA !important;
+  background: var(--delegate-danger-bg) !important;
+  color: var(--delegate-danger-text) !important;
+  border-color: var(--delegate-danger-border) !important;
 }
 
 .section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 24px;
-  margin-bottom: 14px;
-}
-
-.section-title-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
 }
 
 .section-title {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--delegate-text);
-  letter-spacing: -0.2px;
+  letter-spacing: -0.02em;
+  color: var(--delegate-text-primary);
 }
 
 .badge-count {
-  background: var(--delegate-accent-gradient);
+  background: var(--delegate-brand-gradient);
   color: #FFFFFF;
   font-weight: 700;
-  font-size: 0.75rem;
-  padding: 4px 12px;
+  font-size: 0.72rem;
+  padding: 3px 10px;
   border-radius: 999px;
-  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(13, 148, 136, 0.2);
 }
 
-/* ---------- Empty State ---------- */
-.empty-state-card {
-  text-align: center;
-  padding: 40px 24px;
-  margin: 16px 0;
-}
-
-.empty-state-card h3 {
-  margin: 12px 0 6px;
-  font-weight: 700;
-  color: var(--delegate-text);
-}
-
-.empty-state-card p {
-  color: var(--delegate-muted);
-  font-size: 0.95rem;
-}
-
-/* ---------- Policy Footer Badge ---------- */
+/* Policy Footer Badge */
 .policy-footer-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
-  margin-top: 14px;
-  font-size: 0.82rem;
+  padding: 7px 14px;
+  margin-top: 10px;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--delegate-accent-dark);
-  background: #F0FDFA;
-  border: 1px solid #CCFBF1;
-  border-radius: 10px;
+  color: var(--delegate-brand-hover);
+  background: var(--delegate-brand-light);
+  border: 1px solid var(--delegate-brand-border);
+  border-radius: 8px;
 }
 
-/* ---------- Action Buttons ---------- */
-button[data-testid^="action-"] {
-  border-radius: 12px !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.2px !important;
-  background: #FFFFFF !important;
-  color: #0F172A !important;
-  border: 1px solid #CBD5E1 !important;
-  box-shadow: var(--delegate-shadow-sm) !important;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-button[data-testid^="action-"]:hover {
-  background: #F8FAFC !important;
-  border-color: #94A3B8 !important;
-  transform: translateY(-1px);
-  box-shadow: var(--delegate-shadow-md) !important;
-}
-
-button[data-testid^="action-"]:active {
-  transform: translateY(1px);
-}
-
-/* ---------- Chat Bubble Styling ---------- */
+/* ==========================================================================
+   Chat Stream, Bubbles & Micro-Animations
+   ========================================================================== */
 .message-row {
-  animation: slideUpFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: messageIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
 }
 
-@keyframes slideUpFade {
-  0% { opacity: 0; transform: translateY(8px); }
+@keyframes messageIn {
+  0% { opacity: 0; transform: translateY(6px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* User Messages — Deep Slate / Obsidian Contrast Bubble */
+/* User Message Bubble — Sleek Obsidian Pill */
 .message-row[data-author="User"] .cl-message,
 .message-row[data-author="User"] [class*="cl-message"] {
-  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%) !important;
+  background: #0F172A !important;
   color: #FFFFFF !important;
-  border: 1px solid #334155 !important;
+  border: 1px solid #1E293B !important;
   border-bottom-right-radius: 4px !important;
-  border-top-right-radius: 20px !important;
-  border-top-left-radius: 20px !important;
-  border-bottom-left-radius: 20px !important;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12) !important;
+  border-top-right-radius: 18px !important;
+  border-top-left-radius: 18px !important;
+  border-bottom-left-radius: 18px !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12) !important;
+  padding: 12px 18px !important;
 }
 
 .message-row[data-author="User"] * {
   color: #FFFFFF !important;
 }
 
-/* Assistant Messages — Pure White Card Bubble */
+/* Assistant Message Bubble — Pure Crisp White Elevation */
 .message-row:not([data-author="User"]) .cl-message,
 .message-row:not([data-author="User"]) [class*="cl-message"] {
-  background: #FFFFFF !important;
-  color: #0F172A !important;
-  border: 1px solid var(--delegate-card-border) !important;
+  background: var(--delegate-surface) !important;
+  color: var(--delegate-text-primary) !important;
+  border: 1px solid var(--delegate-border) !important;
   border-bottom-left-radius: 4px !important;
-  border-top-right-radius: 20px !important;
-  border-top-left-radius: 20px !important;
-  border-bottom-right-radius: 20px !important;
+  border-top-right-radius: 18px !important;
+  border-top-left-radius: 18px !important;
+  border-bottom-right-radius: 18px !important;
   box-shadow: var(--delegate-shadow-sm) !important;
+  padding: 14px 20px !important;
 }
 
 .message-row:not([data-author="User"]) p,
 .message-row:not([data-author="User"]) span,
 .message-row:not([data-author="User"]) div {
-  color: #0F172A;
+  color: var(--delegate-text-primary);
+  line-height: 1.6;
 }
 
-/* Steps / Tool Call expanders */
+/* Chain of Thought / Tool Steps Accordion */
 .step, [class*="step"], [data-testid="step"] {
-  background: #F8FAFC !important;
-  border: 1px solid var(--delegate-card-border) !important;
-  border-left: 3px solid var(--delegate-accent) !important;
+  background: var(--delegate-surface-subtle) !important;
+  border: 1px solid var(--delegate-border) !important;
+  border-left: 3px solid var(--delegate-brand) !important;
   border-radius: 10px !important;
-  color: #0F172A !important;
+  color: var(--delegate-text-primary) !important;
+  margin: 6px 0 !important;
 }
 
-/* ---------- Chat Message Composer (Light Mode) ---------- */
+/* ==========================================================================
+   Action Buttons (Stripe / Linear Pill Style)
+   ========================================================================== */
+button[data-testid^="action-"] {
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  font-size: 0.88rem !important;
+  letter-spacing: -0.01em !important;
+  background: var(--delegate-surface) !important;
+  color: var(--delegate-text-primary) !important;
+  border: 1px solid var(--delegate-border-strong) !important;
+  box-shadow: var(--delegate-shadow-xs) !important;
+  padding: 8px 16px !important;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+button[data-testid^="action-"]:hover {
+  background: var(--delegate-surface-subtle) !important;
+  border-color: var(--delegate-text-muted) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--delegate-shadow-sm) !important;
+}
+
+button[data-testid^="action-"]:active {
+  transform: translateY(1px);
+}
+
+/* Action button for approve / resolve */
+button[data-testid*="approve" i],
+button[data-testid*="refund" i] {
+  background: var(--delegate-brand) !important;
+  color: #FFFFFF !important;
+  border-color: var(--delegate-brand-hover) !important;
+}
+button[data-testid*="approve" i]:hover,
+button[data-testid*="refund" i]:hover {
+  background: var(--delegate-brand-hover) !important;
+}
+
+/* ==========================================================================
+   Input Composer (Floating Rounded Container)
+   ========================================================================== */
 #chat-input-wrapper, 
 .cl-chat-input, 
 .MuiInputBase-root, 
 form, 
 [data-testid="chat-input-container"] {
-  background-color: #FFFFFF !important;
+  background-color: var(--delegate-surface) !important;
   border-radius: 16px !important;
 }
 
 #chat-input-wrapper,
 [data-testid="chat-input-container"] {
-  border: 1.5px solid #E2E8F0 !important;
+  border: 1.5px solid var(--delegate-border) !important;
   box-shadow: var(--delegate-shadow-md) !important;
-  transition: all 0.2s ease !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 #chat-input-wrapper:focus-within,
 [data-testid="chat-input-container"]:focus-within {
-  border-color: #0D9488 !important;
-  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15), var(--delegate-shadow-md) !important;
+  border-color: var(--delegate-brand) !important;
+  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12), var(--delegate-shadow-md) !important;
 }
 
-/* Textarea inside composer */
 [data-testid="chat-input"], 
 .cl-input, 
 textarea, 
 .MuiInputBase-input, 
 #chat-input {
   background-color: transparent !important;
-  color: #0F172A !important;
-  -webkit-text-fill-color: #0F172A !important;
-  font-size: 0.98rem !important;
+  color: var(--delegate-text-primary) !important;
+  -webkit-text-fill-color: var(--delegate-text-primary) !important;
+  font-size: 0.96rem !important;
+  line-height: 1.5 !important;
 }
 
 [data-testid="chat-input"]::placeholder, 
 textarea::placeholder, 
 .MuiInputBase-input::placeholder {
-  color: #94A3B8 !important;
-  -webkit-text-fill-color: #94A3B8 !important;
+  color: var(--delegate-text-subtle) !important;
+  -webkit-text-fill-color: var(--delegate-text-subtle) !important;
 }
 
-/* Send Button — Vivid Teal Pill */
+/* Send Button — Circular Gradient Lift */
 button[id="send-button"], 
 [data-testid="send-button"], 
 .cl-send-button, 
 button[aria-label="Send"] {
-  background: var(--delegate-accent-gradient) !important;
+  background: var(--delegate-brand-gradient) !important;
   color: #FFFFFF !important;
   border-radius: 50% !important;
-  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3) !important;
-  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.35) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 button[id="send-button"]:hover, 
 [data-testid="send-button"]:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4) !important;
+  transform: scale(1.06) translateY(-1px);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.45) !important;
+}
+
+button[id="send-button"]:active, 
+[data-testid="send-button"]:active {
+  transform: scale(0.96);
 }
 
 button[id="send-button"] svg, 
@@ -375,12 +474,13 @@ button[id="send-button"] svg,
   stroke: #FFFFFF !important;
 }
 
-/* Hide Sidebar Info Alert (No threads found) */
+/* ==========================================================================
+   Clean Overrides & Watermark Removal
+   ========================================================================== */
 .MuiAlert-root, [role="alert"], .MuiAlert-standardInfo {
   display: none !important;
 }
 
-/* Hide stock theme toggles & watermark */
 #theme-toggle,
 button[aria-label*="theme" i],
 button[aria-label*="mode" i],

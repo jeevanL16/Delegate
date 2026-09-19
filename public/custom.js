@@ -1,6 +1,5 @@
 /* ============================================================
-   Delegate: Resolve — Custom Client Script
-   Injected via .chainlit/config.toml -> [UI] custom_js = "/public/custom.js"
+   Delegate: Resolve — Custom Client Script (Light Mode Enhancements)
    ============================================================ */
 
 (function () {
@@ -24,12 +23,12 @@
     header.innerHTML = `
       <div class="delegate-header-inner">
         <div class="delegate-header-brand">
-          <img src="/public/logo.svg" alt="Delegate" class="delegate-header-logo" />
+          <img src="/public/logo.svg" alt="Delegate" width="26" height="26" class="delegate-header-logo" />
           <span class="delegate-header-word">Delegate : Resolve</span>
         </div>
         <div class="delegate-header-trust">
-          <img src="/public/icons/shield-check.svg" width="14" height="14" alt="Secured" />
-          <span>🔒 Secured by Delegate Policy Engine</span>
+          <span class="pulse-dot"></span>
+          <span>Secured by Policy Engine</span>
         </div>
       </div>
     `;
@@ -39,7 +38,6 @@
   }
 
   function hideThemeToggle() {
-    // Hide theme toggle buttons to lock theme to dark mode
     const selectors = [
       '#theme-toggle',
       'button[aria-label*="theme" i]',
@@ -68,28 +66,13 @@
     });
   }
 
-  function applyPolicyOutcomeShine() {
-    const steps = document.querySelectorAll('.step, [class*="step"], [data-testid="step"]');
-    steps.forEach((step) => {
-      if (
-        step.textContent &&
-        step.textContent.includes('Policy Outcome') &&
-        !step.classList.contains('delegate-shine')
-      ) {
-        step.classList.add('delegate-shine');
-      }
-    });
-  }
-
   function init() {
     injectHeader();
     hideThemeToggle();
-    applyPolicyOutcomeShine();
 
     const observer = new MutationObserver(() => {
       injectHeader();
       hideThemeToggle();
-      applyPolicyOutcomeShine();
     });
 
     observer.observe(document.body, {
