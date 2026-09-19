@@ -27,6 +27,15 @@ app.add_middleware(
 )
 
 # ── Routes ────────────────────────────────────────────────────────────────────
+@app.get("/")
+def root():
+    return {
+        "name": "Delegate: Resolve API",
+        "status": "healthy",
+        "version": "1.0.0",
+        "health_check": "/health"
+    }
+
 app.include_router(health.router)
 app.include_router(tickets.router)
 app.include_router(human.router)
