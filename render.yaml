@@ -1,0 +1,72 @@
+services:
+  # ============================================================================
+  # Backend FastAPI Web Service
+  # ============================================================================
+  - type: web
+    name: delegate-api
+    runtime: python
+    region: ohio
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SERVICE_API_KEY
+        generateValue: true
+      - key: HUMAN_JWT_SECRET
+        generateValue: true
+      - key: LLM_PROVIDER
+        value: groq
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        value: llama-3.3-70b-versatile
+      - key: REFUND_CAP_CENTS
+        value: "10000"
+      - key: MAX_TOOL_CALLS_PER_TICKET
+        value: "5"
+      - key: MAX_REFUNDS_PER_TICKET
+        value: "1"
+      - key: N8N_WEBHOOK_URL
+        sync: false
+      - key: N8N_WEBHOOK_SECRET
+        sync: false
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+
+  # ============================================================================
+  # Frontend Streamlit UI Service
+  # ============================================================================
+  - type: web
+    name: delegate-ui
+    runtime: python
+    region: ohio
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run ui/streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    envVars:
+      - key: API_BASE_URL
+        fromService:
+          type: web
+          name: delegate-api
+          property: host
+      - key: SERVICE_API_KEY
+        fromService:
+          type: web
+          name: delegate-api
+          envVarKey: SERVICE_API_KEY
+      - key: HUMAN_JWT_SECRET
+        fromService:
+          type: web
+          name: delegate-api
+          envVarKey: HUMAN_JWT_SECRET
+      - key: HUMAN_JWT_TOKEN
+        sync: false

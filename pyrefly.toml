@@ -1,0 +1,6 @@
+python-interpreter-path = "d:/Delegate/.venv/Scripts/python.exe"
+site-package-path = [
+    "d:/Delegate/.venv/Lib/site-packages",
+    "C:/Users/Jeevan/AppData/Local/Programs/Python/Python311/Lib/site-packages"
+]
+search-path = ["d:/Delegate"]
