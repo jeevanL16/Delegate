@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS steps (
     "showInput" TEXT,
     "language" TEXT,
     "indent" INT,
-    "defaultOpen" BOOLEAN,
-    "autoCollapse" BOOLEAN
+    "defaultOpen" BOOLEAN DEFAULT false,
+    "autoCollapse" BOOLEAN DEFAULT false
 );
 
 CREATE TABLE IF NOT EXISTS elements (
@@ -92,16 +92,12 @@ CREATE TABLE IF NOT EXISTS feedbacks (
 """
 
 ALTER_TABLES_SQL = """
-ALTER TABLE steps ADD COLUMN IF NOT EXISTS "defaultOpen" BOOLEAN;
-ALTER TABLE steps ADD COLUMN IF NOT EXISTS "autoCollapse" BOOLEAN;
-DO $$ BEGIN
-    BEGIN
-        ALTER TABLE threads ALTER COLUMN "tags" TYPE TEXT[] USING tags::TEXT[];
-    EXCEPTION
-        WHEN OTHERS THEN
-            NULL;
-    END;
-END $$;
+ALTER TABLE steps ADD COLUMN IF NOT EXISTS "defaultOpen" BOOLEAN DEFAULT false;
+ALTER TABLE steps ADD COLUMN IF NOT EXISTS "autoCollapse" BOOLEAN DEFAULT false;
+ALTER TABLE steps ADD COLUMN IF NOT EXISTS "showInput" TEXT;
+ALTER TABLE steps ADD COLUMN IF NOT EXISTS "indent" INT;
+ALTER TABLE steps ADD COLUMN IF NOT EXISTS "language" TEXT;
+ALTER TABLE threads ADD COLUMN IF NOT EXISTS "tags" TEXT[];
 """
 
 
