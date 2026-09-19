@@ -29,6 +29,7 @@ Features (unchanged from before):
 - Persistent conversation threads via Neon PostgreSQL SQLAlchemy Data Layer.
 """
 
+import asyncio
 import json
 import logging
 import os
@@ -245,7 +246,7 @@ async def render_customer_welcome():
     cust_name = cl.user_session.get("customer_name") or "Customer"
     first_name = str(cust_name).split()[0]
 
-    latest_order = get_latest_order(cust_id) if cust_id else None
+    latest_order = (await asyncio.to_thread(get_latest_order, cust_id)) if cust_id else None
     cl.user_session.set("latest_order", latest_order)
 
     welcome_text = (
@@ -257,8 +258,9 @@ async def render_customer_welcome():
 
 
 async def render_staff_dashboard():
-    queue = get_human_queue()
-    customers_map = {c["id"]: c for c in get_customers()}
+    queue = await asyncio.to_thread(get_human_queue)
+    customers_list = await asyncio.to_thread(get_customers)
+    customers_map = {c["id"]: c for c in customers_list}
 
     if not queue:
         await cl.Message(
@@ -394,7 +396,7 @@ async def on_message(message: cl.Message):
     transient_msg = cl.Message(content="*Delegate is checking your order…*")
     await transient_msg.send()
 
-    ticket_res = create_ticket(customer_id=customer_id, raw_text=message.content, order_id=order_id)
+    ticket_res = await asyncio.to_thread(create_ticket, customer_id=customer_id, raw_text=message.content, order_id=order_id)
     if not ticket_res or "ticket_id" not in ticket_res:
         await transient_msg.remove()
         await cl.Message(
@@ -404,8 +406,8 @@ async def on_message(message: cl.Message):
 
     ticket_id = ticket_res["ticket_id"]
 
-    resolve_res = resolve_ticket(ticket_id)
-    ticket_detail = get_ticket(ticket_id) or {}
+    resolve_res = await asyncio.to_thread(resolve_ticket, ticket_id)
+    ticket_detail = (await asyncio.to_thread(get_ticket, ticket_id)) or {}
     if not resolve_res and not ticket_detail:
         await transient_msg.remove()
         await cl.Message(
@@ -513,7 +515,8 @@ async def on_message(message: cl.Message):
     else:
         email_tpl = "info_needed"
 
-    send_n8n_notification(
+    await asyncio.to_thread(
+        send_n8n_notification,
         ticket_id=ticket_id,
         template=email_tpl,
         customer_email=cust_email,
@@ -521,7 +524,8 @@ async def on_message(message: cl.Message):
     )
 
     cust_name = cl.user_session.get("customer_name") or "Customer"
-    send_slack_notification(
+    await asyncio.to_thread(
+        send_slack_notification,
         ticket_id=ticket_id,
         customer_name=str(cust_name),
         customer_email=str(cust_email or "customer@example.in"),
@@ -531,7 +535,8 @@ async def on_message(message: cl.Message):
     )
 
     try:
-        reply_text = humanize(
+        reply_text = await asyncio.to_thread(
+            humanize,
             ticket=ticket_detail or resolve_res or {},
             order=latest_order,
             user_message=message.content,
@@ -549,5 +554,5 @@ async def on_message(message: cl.Message):
 
     await cl.Message(content=reply_text).send()
 
-    updated_order = get_latest_order(customer_id)
+    updated_order = await asyncio.to_thread(get_latest_order, customer_id)
     cl.user_session.set("latest_order", updated_order)
