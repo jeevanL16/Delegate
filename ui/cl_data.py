@@ -107,9 +107,8 @@ def get_db_async_url() -> str:
         return ""
     clean = raw_url.replace("postgresql+psycopg://", "postgresql+asyncpg://")
     clean = clean.replace("postgresql://", "postgresql+asyncpg://")
-    # Strip any query parameters for asyncpg compatibility
-    clean = clean.split("?")[0]
-    return clean
+    base_url = clean.split("?")[0]
+    return f"{base_url}?prepared_statement_cache_size=0&statement_cache_size=0"
 
 
 async def init_chainlit_tables():
